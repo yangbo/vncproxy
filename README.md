@@ -249,6 +249,26 @@ $ ./screenshot version
 $ ./screenshot --imageFile=./screen.jpeg --vncHost=127.0.0.1 --vncPort=5900 --vncPassword=12345612       
 ```
 
+## Go Environment
+
+The `go env` command in Go is used to display or set environment variables that affect the behavior of the Go tools. It provides information about the Go environment, including the Go root, Go path, and other configuration settings.
+
+To display all the environment variables, you can use:
+```sh
+go env
+```
+
+To get the value of a specific environment variable, you can use:
+```sh
+go env [VAR]
+```
+For example, to get the value of `GOPATH`:
+```sh
+go env GOPATH
+```
+
+For more details, refer to the official [Go documentation](https://golang.org/doc/).
+
 ## 项目参考
 
 本项目参考了以下项目完成。
@@ -267,5 +287,14 @@ $ ./screenshot --imageFile=./screen.jpeg --vncHost=127.0.0.1 --vncPort=5900 --vn
 
 ![微信二维码](/docs/images/5bb8dbe702ce04b0bdde8c26583b152.jpg)
 
+## Docker 构建
 
+构建命令：
 
+```bash
+# 构建镜像
+docker build . -t vncproxy:latest
+# 运行容器
+cd [vncproxy项目根目录]
+docker run --mount type=bind,src=$pwd/bin,dst=/vncproxy/bin --name vncproxy_builder vncproxy:latest
+```
