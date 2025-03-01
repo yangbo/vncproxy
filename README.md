@@ -1,3 +1,5 @@
+# 注意：本项目只是 vnc 的 proxy(代理) 而已，并不是 vnc server，所以你还需要有一个 vnc server，例如 realVNC 或其他开源的 vnc server。
+
 # VncProxy [![GitHub release](https://img.shields.io/github/v/release/vprix/vncproxy.svg?style=flat-square)](https://github.com/vprix/vncproxy/releases) [![report card](https://goreportcard.com/badge/github.com/vprix/vncproxy?style=flat-square)](http://goreportcard.com/report/vprix/vncproxy) [![github issues](https://img.shields.io/github/issues/vprix/vncproxy.svg?style=flat-square)](https://github.com/vprix/vncproxy/issues?q=is%3Aopen+is%3Aissue) [![github closed issues](https://img.shields.io/github/issues-closed-raw/vprix/vncproxy.svg?style=flat-square)](https://github.com/vprix/vncproxy/issues?q=is%3Aissue+is%3Aclosed) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/vprix/vncproxy) [![view examples](https://img.shields.io/badge/learn%20by-examples-00BCD4.svg?style=flat-square)](https://github.com/vprix/vncproxy/tree/main/examples)
 ## VncProxy简介
 
@@ -294,7 +296,13 @@ For more details, refer to the official [Go documentation](https://golang.org/do
 ```bash
 # 构建镜像
 docker build . -t vncproxy:latest
+
 # 运行容器
 cd [vncproxy项目根目录]
-docker run --mount type=bind,src=$pwd/bin,dst=/vncproxy/bin --name vncproxy_builder vncproxy:latest
+docker run --rm --mount type=bind,src=$pwd/bin,dst=/vncproxy/bin2 --name vncproxy_builder vncproxy:latest bash -c "cp /vncproxy/bin/* /vncproxy/bin2/"
 ```
+
+> 但是你会发现这个编译出来的可执行程序是 linux 版本的，无法在 windows 下运行！
+> 抱歉，我也是做到这一步才发现的~~~
+> 并且本项目只是 vnc 的 proxy(代理) 而已，并不是 vnc server，所以你还需要有一个 vnc server，例如 realVNC！
+> 并且 realVNC 还需要注册，比较麻烦。
